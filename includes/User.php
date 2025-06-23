@@ -3,12 +3,14 @@ class User {
     private $id;
     private $firstName;
     private $name;
+    private $birthDate;
     private $email;
 
-    public function __construct($id = null, $firstName, $name, $email) {
+    public function __construct($id = null, $firstName, $name, $birthDate, $email) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->name = $name;
+        $this->birthDate = $birthDate;
         $this->email = $email;
     }
 
@@ -25,6 +27,10 @@ class User {
         return $this->name;
     }
 
+    public function getBirthDate() {
+        return $this->birthDate;
+    }
+
     public function getEmail() {
         return $this->email;
     }
@@ -36,6 +42,10 @@ class User {
 
     public function setEmail($email) {
         $this->email = $email;
+    }
+
+    public function setBirthDate($birthDate) {
+        $this->birthDate = $birthDate;
     }
 
     public function setFirstName($firstName) {

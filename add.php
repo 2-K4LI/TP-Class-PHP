@@ -6,17 +6,19 @@ require_once 'includes/UserManager.php';
 $message = '';
 $firstName = '';
 $name = '';
+$birthDate = '';
 $email = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = trim($_POST['firstName']);
     $name = trim($_POST['name']);
+    $birthDate = trim($_POST['birthDate']);
     $email = trim($_POST['email']);
 
-    if (!empty($firstName) && !empty($name) && !empty($email)) {
+    if (!empty($firstName) && !empty($name) && !empty($birthDate) && !empty($email)) {
         try {
             $userManager = new UserManager();
-            $newUser = new User(null, $firstName, $name, $email);
+            $newUser = new User(null, $firstName, $name, $birthDate, $email);
             $userId = $userManager->create($newUser);
 
             header("Location: index.php?message=Utilisateur ajouté avec succès");
@@ -41,10 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="firstName">Prénom :</label>
         <input type="text" id="firstName" name="firstName" value="<?= htmlspecialchars($firstName) ?>" required>
     </div>
-    
+
     <div class="form-group">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
+    </div>
+
+    <div class="form-group">
+        <label for="birthDate">Date de Naissance :</label>
+        <input type="date" id="birthDate" name="birthDate" value="<?= htmlspecialchars($birthDate) ?>" required>
     </div>
 
     <div class="form-group">
