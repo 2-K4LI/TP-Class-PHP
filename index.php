@@ -17,6 +17,7 @@ $users = $userManager->readAll();
     <thead>
         <tr>
             <th>ID</th>
+            <th>First Name</th>
             <th>Nom</th>
             <th>Email</th>
             <th>Actions</th>
@@ -26,11 +27,12 @@ $users = $userManager->readAll();
         <?php foreach ($users as $user): ?>
         <tr>
             <td><?= htmlspecialchars($user->getId()) ?></td>
+            <td><?= htmlspecialchars($user->getFirstName()) ?></td>
             <td><?= htmlspecialchars($user->getName()) ?></td>
             <td><?= htmlspecialchars($user->getEmail()) ?></td>
             <td>
                 <a href="edit.php?id=<?= $user->getId() ?>" class="btn btn-edit">Modifier</a>
-                <a href="delete.php?id=<?= $user->getId() ?>" class="btn btn-delete" 
+                <a href="delete.php?id=<?= $user->getId() ?>" class="btn btn-delete"
                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')">Supprimer</a>
             </td>
         </tr>

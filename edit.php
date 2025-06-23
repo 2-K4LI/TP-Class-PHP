@@ -17,15 +17,18 @@ if (!$user) {
 }
 
 $message = '';
+$firstName = $user->getFirstName();
 $name = $user->getName();
 $email = $user->getEmail();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $firstName = trim($_POST['firstName']);
     $name = trim($_POST['name']);
     $email = trim($_POST['email']);
 
-    if (!empty($name) && !empty($email)) {
+    if (!empty($firstName) && !empty($name) && !empty($email)) {
         try {
+            $user->setFirstName($firstName);
             $user->setName($name);
             $user->setEmail($email);
             $userManager->update($user);
@@ -50,6 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="POST">
     <input type="hidden" name="id" value="<?= $user->getId() ?>">
 
+<div class="form-group">
+        <label for="firstName">Prénom :</label>
+        <input type="text" id="firstName" name="firstName" value="<?= htmlspecialchars($firstName) ?>" required>
+    </div>
+    
     <div class="form-group">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>

@@ -1,11 +1,13 @@
 <?php
 class User {
     private $id;
+    private $firstName;
     private $name;
     private $email;
 
-    public function __construct($id = null, $name, $email) {
+    public function __construct($id = null, $firstName, $name, $email) {
         $this->id = $id;
+        $this->firstName = $firstName;
         $this->name = $name;
         $this->email = $email;
     }
@@ -13,6 +15,10 @@ class User {
     // Getters
     public function getId() {
         return $this->id;
+    }
+
+    public function getFirstName() {
+        return $this->firstName;
     }
 
     public function getName() {
@@ -30,6 +36,10 @@ class User {
 
     public function setEmail($email) {
         $this->email = $email;
+    }
+
+    public function setFirstName($firstName) {
+        $this->firstName = $firstName;
     }
 }
 ?>
