@@ -2,6 +2,7 @@
 require_once 'includes/header.php';
 require_once 'includes/User.php';
 require_once 'includes/UserManager.php';
+require_once 'includes/Session.php';
 
 if (!isset($_GET['id'])) {
     header("Location: index.php");

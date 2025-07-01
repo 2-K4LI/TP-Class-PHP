@@ -1,5 +1,5 @@
 <?php
-require_once '../database.php';
+require_once __DIR__ . '/../database.php';
 require_once 'Session.php';
 require_once 'User.php';
 
@@ -37,15 +37,16 @@ class Auth {
             null, $name, $email, $firstname, $birthDate, $username, null, date('Y-m-d H:i:s')
         );
 
-        $user->setPassword($password);
+        $user->setPassword($password); // Hachage du mot de passe
 
         $stmt = $this->db->prepare(
-            "INSERT INTO users (name, firstname, username, email, password) 
-             VALUES (:name, :firstname, :username, :email, :password)"
-        );
+            "INSERT INTO users (name, firstname, birthDate, username, email, password) 
+             VALUES (:name, :firstname, :birthDate, :username, :email, :password)"
+        );  
 
         $stmt->bindValue(':name', $user->getName());
         $stmt->bindValue(':firstname', $user->getFirstName());
+        $stmt->bindValue(':birthDate', $user->getBirthDate());
         $stmt->bindValue(':username', $user->getUsername());
         $stmt->bindValue(':email', $user->getEmail());
         $stmt->bindValue(':password', $user->getPassword());
@@ -55,7 +56,7 @@ class Auth {
         }
 
         return false;
-    }
+}
 
     public function login($email, $password) {
     $userData = $this->findUserByEmail($email);

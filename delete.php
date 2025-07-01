@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/UserManager.php';
+require_once 'includes/Session.php';
 
 if (isset($_GET['id'])) {
     $userManager = new UserManager();
