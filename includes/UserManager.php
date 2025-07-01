@@ -11,11 +11,12 @@ class UserManager {
     }
 
     public function create(User $user) {
-        $stmt = $this->db->prepare("INSERT INTO users (firstName, name, birthDate, email) VALUES (:firstName, :name, :birthDate, :email)");
+        $stmt = $this->db->prepare("INSERT INTO users (firstName, name, birthDate, email, username, password) VALUES (:firstName, :name, :birthDate, :email, :username, :password)");
         $stmt->bindValue(':firstName', $user->getFirstName());
         $stmt->bindValue(':name', $user->getName());
         $stmt->bindValue(':birthDate', $user->getBirthDate());
         $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':username', $user->getUsername());
         $stmt->execute();
 
         return $this->db->lastInsertId();
@@ -29,7 +30,15 @@ class UserManager {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            return new User($data['id'], $data['firstName'], $data['name'], $data['birthDate'], $data['email']);
+            return new User(
+                $data['id'],  
+                $data['name'], 
+                $data['email'], 
+                $data['firstName'],
+                $data['birthDate'], 
+                $data['username'],  
+                null, 
+                $data['created_at']);
         }
 
         return null;
@@ -40,7 +49,16 @@ class UserManager {
         $users = [];
 
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $users[] = new User($data['id'], $data['firstName'], $data['name'], $data['birthDate'], $data['email']);
+            $users[] = new User(
+                $data['id'], 
+                $data['name'], 
+                $data['email'],
+                $data['firstName'], 
+                $data['birthDate'], 
+                $data['username'], 
+                null,
+                $data['created_at']
+            );
         }
 
         return $users;
@@ -53,6 +71,7 @@ class UserManager {
         $stmt->bindValue(':birthDate', $user->getBirthDate());
         $stmt->bindValue(':email', $user->getEmail());
         $stmt->bindValue(':id', $user->getId());
+        $stmt->bindValue(':name', $user->getUsername());
 
         return $stmt->execute();
     }

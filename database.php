@@ -1,4 +1,6 @@
 <?php
+require_once 'includes/Session.php';
+Session::start();
 class Database {
     private static $instance = null;
     private $connection;

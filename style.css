@@ -128,3 +128,50 @@ form {
 .form-group input[type="submit"]:hover {
     background: #575757;
 }
+.auth-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.error {
+    color: #f44336;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #ffebee;
+    border-radius: 4px;
+}
+
+.success {
+    color: #4CAF50;
+    padding: 10px;
+    margin-bottom: 15px;
+    background: #e8f5e9;
+    border-radius: 4px;
+}
+.user-section {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-section span {
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.logout-btn, .login-btn {
+    background: #d9534f !important;
+    padding: 5px 10px !important;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.logout-btn:hover, .login-btn:hover {
+    background: #c9302c !important;
+    text-decoration: none;
+}
